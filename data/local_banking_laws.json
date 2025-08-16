@@ -1,79 +1,79 @@
 {
     "USA": {
         "Dodd-Frank Act": [
-            "Financial Stability Oversight Council (FSOC)",
-            "Volcker Rule",
-            "Consumer Financial Protection Bureau (CFPB)",
-            "Whistleblower Protections"
+            {"name": "Financial Stability Oversight Council (FSOC)", "type": "key", "question_text": "Does the bank comply with the oversight requirements of the Financial Stability Oversight Council (FSOC)?"},
+            {"name": "Volcker Rule", "type": "key", "question_text": "Does the bank adhere to the Volcker Rule's prohibitions on proprietary trading and hedge fund/private equity investments?"},
+            {"name": "Consumer Financial Protection Bureau (CFPB)", "type": "key", "question_text": "Does the bank comply with consumer protection regulations enforced by the Consumer Financial Protection Bureau (CFPB)?"},
+            {"name": "Whistleblower Protections", "type": "secondary", "question_text": "Are adequate whistleblower protections in place as mandated by the Dodd-Frank Act?"}
         ]
     },
     "UAE": {
         "Federal Law No. 14 of 2018": [
-            "Licensing and Regulation of Banks",
-            "Capital Adequacy",
-            "Corporate Governance",
-            "Anti-Money Laundering (AML) and Counter-Terrorist Financing (CTF)"
+            {"name": "Licensing and Regulation of Banks", "type": "key", "question_text": "Does the bank hold all necessary licenses and comply with the regulatory framework under UAE Federal Law No. 14 of 2018?"},
+            {"name": "Capital Adequacy", "type": "key", "question_text": "Does the bank meet the capital adequacy requirements stipulated by UAE Federal Law No. 14 of 2018?"},
+            {"name": "Corporate Governance", "type": "key", "question_text": "Are the bank's corporate governance practices in line with UAE Federal Law No. 14 of 2018?"},
+            {"name": "Anti-Money Laundering (AML) and Counter-Terrorist Financing (CTF)", "type": "key", "question_text": "Does the bank have robust AML/CTF measures in place as required by UAE Federal Law No. 14 of 2018?"}
         ]
     },
     "UK": {
         "Financial Services and Markets Act 2000": [
-            "The Financial Conduct Authority (FCA)",
-            "The Prudential Regulation Authority (PRA)",
-            "Financial Services Compensation Scheme (FSCS)"
+            {"name": "The Financial Conduct Authority (FCA)", "type": "key", "question_text": "Does the bank comply with regulations set by the Financial Conduct Authority (FCA)?"},
+            {"name": "The Prudential Regulation Authority (PRA)", "type": "key", "question_text": "Does the bank comply with prudential regulations set by the Prudential Regulation Authority (PRA)?"},
+            {"name": "Financial Services Compensation Scheme (FSCS)", "type": "secondary", "question_text": "Does the bank adhere to the requirements of the Financial Services Compensation Scheme (FSCS)?"}
         ],
         "Financial Services (Banking Reform) Act 2013": [
-            "Ring-fencing of retail banking",
-            "Bail-in powers"
+            {"name": "Ring-fencing of retail banking", "type": "key", "question_text": "Has the bank implemented ring-fencing of its retail banking operations as per the Act?"},
+            {"name": "Bail-in powers", "type": "secondary", "question_text": "Are the bank's resolution plans in line with the bail-in powers introduced by the Act?"}
         ]
     },
     "EU": {
         "Capital Requirements Regulation (CRR) and Directive (CRD)": [
-            "Capital requirements for banks",
-            "Supervisory review",
-            "Market discipline"
+            {"name": "Capital requirements for banks", "type": "key", "question_text": "Does the bank meet the capital requirements as stipulated by CRR/CRD?"},
+            {"name": "Supervisory review", "type": "key", "question_text": "Does the bank comply with the supervisory review process under CRR/CRD?"},
+            {"name": "Market discipline", "type": "secondary", "question_text": "Does the bank adhere to market discipline requirements under CRR/CRD?"}
         ],
         "General Data Protection Regulation (GDPR)": [
-            "Data protection principles",
-            "Data subject rights",
-            "Data protection by design and by default"
+            {"name": "Data protection principles", "type": "key", "question_text": "Does the bank adhere to the core data protection principles of GDPR?"},
+            {"name": "Data subject rights", "type": "key", "question_text": "Does the bank have processes in place to facilitate data subject rights under GDPR?"},
+            {"name": "Data protection by design and by default", "type": "key", "question_text": "Does the bank implement data protection by design and by default in its systems and processes?"}
         ]
     },
     "Ghana": {
         "Banks and Specialised Deposit-Taking Institutions Act, 2016 (Act 930)": [
-            "Licensing of banks",
-            "Capital and liquidity requirements",
-            "Corporate governance",
-            "AML/CFT"
+            {"name": "Licensing of banks", "type": "key", "question_text": "Does the bank hold the necessary licenses as per Act 930?"},
+            {"name": "Capital and liquidity requirements", "type": "key", "question_text": "Does the bank meet the capital and liquidity requirements under Act 930?"},
+            {"name": "Corporate governance", "type": "key", "question_text": "Are the bank's corporate governance practices compliant with Act 930?"},
+            {"name": "AML/CFT", "type": "key", "question_text": "Does the bank have adequate AML/CFT measures as required by Act 930?"}
         ]
     },
     "Nigeria": {
         "Banks and Other Financial Institutions Act (BOFIA) 2020": [
-            "Licensing and regulation of banks",
-            "Powers of the Central Bank of Nigeria (CBN)",
-            "Corporate governance",
-            "AML/CFT"
+            {"name": "Licensing and regulation of banks", "type": "key", "question_text": "Does the bank comply with the licensing and regulatory provisions of BOFIA 2020?"},
+            {"name": "Powers of the Central Bank of Nigeria (CBN)", "type": "key", "question_text": "Does the bank adhere to directives and regulations issued by the Central Bank of Nigeria (CBN) under BOFIA 2020?"},
+            {"name": "Corporate governance", "type": "key", "question_text": "Are the bank's corporate governance practices compliant with BOFIA 2020?"},
+            {"name": "AML/CFT", "type": "key", "question_text": "Does the bank have adequate AML/CFT measures as required by BOFIA 2020?"}
         ]
     },
     "Pakistan": {
         "The State Bank of Pakistan Act, 1956": [
-            "Powers and functions of the State Bank of Pakistan (SBP)",
-            "Monetary policy",
-            "Regulation of banking system"
+            {"name": "Powers and functions of the State Bank of Pakistan (SBP)", "type": "key", "question_text": "Does the bank comply with the directives and regulations issued by the State Bank of Pakistan (SBP)?"},
+            {"name": "Monetary policy", "type": "secondary", "question_text": "Does the bank align with the monetary policy objectives set by the SBP?"},
+            {"name": "Regulation of banking system", "type": "key", "question_text": "Does the bank adhere to the SBP's regulations for the banking system?"}
         ],
         "The Banking Companies Ordinance, 1962": [
-            "Business of banking companies",
-            "Control over management",
-            "Winding up of banking companies"
+            {"name": "Business of banking companies", "type": "key", "question_text": "Does the bank conduct its business in accordance with the Banking Companies Ordinance, 1962?"},
+            {"name": "Control over management", "type": "key", "question_text": "Are the bank's management and operations subject to the control provisions of the Ordinance?"},
+            {"name": "Winding up of banking companies", "type": "secondary", "question_text": "Are the bank's procedures for potential winding up in line with the Ordinance?"}
         ],
         "Prudential Regulations (SBP)": [
-            "Corporate Governance",
-            "Risk Management",
-            "Credit Management"
+            {"name": "Corporate Governance", "type": "key", "question_text": "Are the bank's corporate governance practices compliant with SBP's Prudential Regulations?"},
+            {"name": "Risk Management", "type": "key", "question_text": "Does the bank have robust risk management frameworks as per SBP's Prudential Regulations?"},
+            {"name": "Credit Management", "type": "key", "question_text": "Are the bank's credit management policies compliant with SBP's Prudential Regulations?"}
         ],
         "Anti-Money Laundering Act, 2010": [
-            "Prohibition of money laundering",
-            "Freezing and forfeiture of assets",
-            "Financial Monitoring Unit (FMU)"
+            {"name": "Prohibition of money laundering", "type": "key", "question_text": "Does the bank have measures in place to prohibit money laundering activities?"},
+            {"name": "Freezing and forfeiture of assets", "type": "key", "question_text": "Does the bank comply with regulations regarding the freezing and forfeiture of assets involved in illicit activities?"},
+            {"name": "Financial Monitoring Unit (FMU)", "type": "secondary", "question_text": "Does the bank cooperate with and report to the Financial Monitoring Unit (FMU) as required by the Act?"}
         ]
     }
 }

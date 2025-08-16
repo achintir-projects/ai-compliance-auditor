@@ -73,7 +73,7 @@ def audit():
         for std_name, std_data in parsed_standards['global'].items():
             if (not standards_to_include or std_name in standards_to_include) and 'clauses' in std_data and std_data['clauses']:
                 # Handle new clause structure (list of dicts)
-                questions[std_name] = [{'name': c['name'], 'type': c['type']} if isinstance(c, dict) else {'name': c, 'type': 'secondary'} for c in std_data['clauses']]
+                questions[std_name] = [{'name': c['name'], 'type': c['type'], 'question_text': c.get('question_text', c['name'])} if isinstance(c, dict) else {'name': c, 'type': 'secondary', 'question_text': c} for c in std_data['clauses']]
 
     if 'local' in parsed_standards and selected_country != 'Global':
         for jurisdiction, laws in parsed_standards['local'].items():
@@ -81,7 +81,7 @@ def audit():
                 for law_name, law_data in laws.items():
                     # Automatically include all local laws for the selected country
                     if 'clauses' in law_data and law_data['clauses']:
-                        questions[law_name] = [{'name': c['name'], 'type': c['type']} if isinstance(c, dict) else {'name': c, 'type': 'secondary'} for c in law_data['clauses']]
+                        questions[law_name] = [{'name': c['name'], 'type': c['type'], 'question_text': c.get('question_text', c['name'])} if isinstance(c, dict) else {'name': c, 'type': 'secondary', 'question_text': c} for c in law_data['clauses']]
 
     return render_template('audit.html', questions=questions)
 
