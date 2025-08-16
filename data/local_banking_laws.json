@@ -1,0 +1,79 @@
+{
+    "USA": {
+        "Dodd-Frank Act": [
+            "Financial Stability Oversight Council (FSOC)",
+            "Volcker Rule",
+            "Consumer Financial Protection Bureau (CFPB)",
+            "Whistleblower Protections"
+        ]
+    },
+    "UAE": {
+        "Federal Law No. 14 of 2018": [
+            "Licensing and Regulation of Banks",
+            "Capital Adequacy",
+            "Corporate Governance",
+            "Anti-Money Laundering (AML) and Counter-Terrorist Financing (CTF)"
+        ]
+    },
+    "UK": {
+        "Financial Services and Markets Act 2000": [
+            "The Financial Conduct Authority (FCA)",
+            "The Prudential Regulation Authority (PRA)",
+            "Financial Services Compensation Scheme (FSCS)"
+        ],
+        "Financial Services (Banking Reform) Act 2013": [
+            "Ring-fencing of retail banking",
+            "Bail-in powers"
+        ]
+    },
+    "EU": {
+        "Capital Requirements Regulation (CRR) and Directive (CRD)": [
+            "Capital requirements for banks",
+            "Supervisory review",
+            "Market discipline"
+        ],
+        "General Data Protection Regulation (GDPR)": [
+            "Data protection principles",
+            "Data subject rights",
+            "Data protection by design and by default"
+        ]
+    },
+    "Ghana": {
+        "Banks and Specialised Deposit-Taking Institutions Act, 2016 (Act 930)": [
+            "Licensing of banks",
+            "Capital and liquidity requirements",
+            "Corporate governance",
+            "AML/CFT"
+        ]
+    },
+    "Nigeria": {
+        "Banks and Other Financial Institutions Act (BOFIA) 2020": [
+            "Licensing and regulation of banks",
+            "Powers of the Central Bank of Nigeria (CBN)",
+            "Corporate governance",
+            "AML/CFT"
+        ]
+    },
+    "Pakistan": {
+        "The State Bank of Pakistan Act, 1956": [
+            "Powers and functions of the State Bank of Pakistan (SBP)",
+            "Monetary policy",
+            "Regulation of banking system"
+        ],
+        "The Banking Companies Ordinance, 1962": [
+            "Business of banking companies",
+            "Control over management",
+            "Winding up of banking companies"
+        ],
+        "Prudential Regulations (SBP)": [
+            "Corporate Governance",
+            "Risk Management",
+            "Credit Management"
+        ],
+        "Anti-Money Laundering Act, 2010": [
+            "Prohibition of money laundering",
+            "Freezing and forfeiture of assets",
+            "Financial Monitoring Unit (FMU)"
+        ]
+    }
+}

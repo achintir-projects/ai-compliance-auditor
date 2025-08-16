@@ -1,0 +1,32 @@
+{
+  "ISO 27001": [
+    {
+      "Control ID": "A.5.1.1",
+      "Control Description": "Policies for information security",
+      "Question": "Do you have documented policies for information security?",
+      "Verification Method": "Declarative"
+    },
+    {
+      "Control ID": "A.6.1.1",
+      "Control Description": "Information security roles and responsibilities",
+      "Question": "Are information security roles and responsibilities defined and allocated?",
+      "Verification Method": "Declarative"
+    }
+  ],
+  "Dodd-Frank Act": [
+    {
+      "Control ID": "Title IX, Sec. 922",
+      "Control Description": "Whistleblower Protections",
+      "Question": "Are whistleblower protections implemented and communicated?",
+      "Verification Method": "Declarative"
+    }
+  ],
+  "SOX": [
+    {
+      "Control ID": "Section 302",
+      "Control Description": "Corporate Responsibility for Financial Reports",
+      "Question": "Are financial reports certified by the CEO and CFO?",
+      "Verification Method": "Declarative"
+    }
+  ]
+}
