@@ -50,8 +50,9 @@ def audit():
     selected_country = request.form.get('country')
     selected_compliance_areas = request.form.getlist('compliance_areas') # getlist for multiple checkboxes
 
-    jurisdiction_to_audit = selected_country if selected_country != 'Global' else ''
-    standards_to_include = selected_compliance_areas
+    # Determine the jurisdiction for context capture
+    # If a specific country is selected, use it. Otherwise, use all for global standards.
+    jurisdiction_for_context = selected_country if selected_country and selected_country != 'Global' else 'UAE, UK, USA, EU, Ghana, Nigeria and Pakistan'
 
     # Construct absolute paths to data files
     global_standards_path = os.path.join(project_home, 'data', 'global_standards.json')
@@ -59,29 +60,30 @@ def audit():
 
     # Step 1: Context & Scope Capture
     context_capturer = ContextCapture()
-    audit_context = context_capturer.gather_context(jurisdiction_to_audit)
+    audit_context = context_capturer.gather_context(jurisdiction_for_context)
 
     # Step 2: Standards Retrieval & Parsing
     standards_parser = StandardsParser(
         global_standards_path=global_standards_path,
         local_laws_path=local_laws_path
     )
+    # Parse all standards and laws relevant to the context jurisdiction
     parsed_standards = standards_parser.retrieve_and_parse(audit_context['jurisdiction'])
 
     questions = {}
+
+    # Include selected global standards
     if 'global' in parsed_standards:
         for std_name, std_data in parsed_standards['global'].items():
-            if (not standards_to_include or std_name in standards_to_include) and 'clauses' in std_data and std_data['clauses']:
-                # Handle new clause structure (list of dicts)
+            if std_name in selected_compliance_areas and 'clauses' in std_data and std_data['clauses']:
                 questions[std_name] = [{'name': c['name'], 'type': c['type'], 'question_text': c.get('question_text', c['name'])} if isinstance(c, dict) else {'name': c, 'type': 'secondary', 'question_text': c} for c in std_data['clauses']]
 
-    if 'local' in parsed_standards and selected_country != 'Global':
-        for jurisdiction, laws in parsed_standards['local'].items():
-            if jurisdiction == selected_country:
-                for law_name, law_data in laws.items():
-                    # Automatically include all local laws for the selected country
-                    if 'clauses' in law_data and law_data['clauses']:
-                        questions[law_name] = [{'name': c['name'], 'type': c['type'], 'question_text': c.get('question_text', c['name'])} if isinstance(c, dict) else {'name': c, 'type': 'secondary', 'question_text': c} for c in law_data['clauses']]
+    # Include all local laws for the selected country (if not 'Global')
+    if selected_country and selected_country != 'Global' and 'local' in parsed_standards:
+        if selected_country in parsed_standards['local']:
+            for law_name, law_data in parsed_standards['local'][selected_country].items():
+                if 'clauses' in law_data and law_data['clauses']:
+                    questions[law_name] = [{'name': c['name'], 'type': c['type'], 'question_text': c.get('question_text', c['name'])} if isinstance(c, dict) else {'name': c, 'type': 'secondary', 'question_text': c} for c in law_data['clauses']]
 
     return render_template('audit.html', questions=questions)
 
