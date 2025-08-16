@@ -1,21 +1,72 @@
 body {
-    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9ecef; /* Light gray background */
+    color: #343a40; /* Dark gray text */
+}
+
+.navbar {
+    background-color: #003366; /* Dark blue navbar */
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important; /* White text for navbar */
 }
 
 .container {
     padding-top: 50px;
+    padding-bottom: 50px;
 }
 
-h1 {
-    color: #003366; /* Dark blue */
+h1, h2, h3, h4, h5, h6 {
+    color: #003366; /* Dark blue headings */
+    margin-bottom: 1rem;
+}
+
+.lead {
+    color: #495057; /* Slightly lighter gray for lead text */
 }
 
 .btn-primary {
-    background-color: #003366;
-    border-color: #003366;
+    background-color: #0056b3; /* Medium blue for primary buttons */
+    border-color: #0056b3;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #00509E;
-    border-color: #00509E;
+    background-color: #004085; /* Darker blue on hover */
+    border-color: #004085;
+}
+
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.card-header {
+    background-color: #003366;
+    color: #ffffff;
+    border-bottom: none;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+}
+
+.list-group-item {
+    border-color: #dee2e6;
+    color: #495057;
+}
+
+.list-group-item-action:hover {
+    background-color: #f1f1f1;
+    color: #003366;
+}
+
+/* Specific styles for the landing page image */
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    margin-top: 2rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }

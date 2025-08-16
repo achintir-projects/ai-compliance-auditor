@@ -8,21 +8,42 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">AI Compliance Auditor</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <h1 class="mt-5">Select Compliance Type</h1>
-                <p class="lead">Choose the type of compliance audit you want to perform.</p>
-                <hr class="my-4">
-                <div class="list-group">
-                    <a href="/audit?compliance_type=global_security" class="list-group-item list-group-item-action">Global Security Standards (ISO 27001, PCI DSS)</a>
-                    <a href="/audit?compliance_type=us_banking" class="list-group-item list-group-item-action">US Banking Laws (Dodd-Frank, etc.)</a>
-                    <a href="/audit?compliance_type=eu_banking" class="list-group-item list-group-item-action">EU Banking Laws (CRR, CRD, GDPR)</a>
-                    <a href="/audit?compliance_type=sox" class="list-group-item list-group-item-action">SOX Compliance</a>
-                    <a href="/audit?compliance_type=basel_iii" class="list-group-item list-group-item-action">Basel III Framework</a>
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h1 class="card-title text-white mb-0">Select Compliance Type</h1>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text lead">Choose the type of compliance audit you want to perform.</p>
+                        <hr>
+                        <div class="list-group">
+                            <a href="/audit?compliance_type=global_security" class="list-group-item list-group-item-action">Global Security Standards (ISO 27001, PCI DSS)</a>
+                            <a href="/audit?compliance_type=us_banking" class="list-group-item list-group-item-action">US Banking Laws (Dodd-Frank, etc.)</a>
+                            <a href="/audit?compliance_type=eu_banking" class="list-group-item list-group-item-action">EU Banking Laws (CRR, CRD, GDPR)</a>
+                            <a href="/audit?compliance_type=sox" class="list-group-item list-group-item-action">SOX Compliance</a>
+                            <a href="/audit?compliance_type=basel_iii" class="list-group-item list-group-item-action">Basel III Framework</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
