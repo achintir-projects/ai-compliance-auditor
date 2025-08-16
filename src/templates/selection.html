@@ -26,18 +26,48 @@
             <div class="col-md-8">
                 <div class="card mt-5">
                     <div class="card-header">
-                        <h1 class="card-title text-white mb-0">Select Compliance Type</h1>
+                        <h1 class="card-title text-white mb-0">Select Compliance Scope</h1>
                     </div>
                     <div class="card-body">
-                        <p class="card-text lead">Choose the type of compliance audit you want to perform.</p>
+                        <p class="card-text lead">Choose the country/jurisdiction and specific compliance areas you want to audit.</p>
                         <hr>
-                        <div class="list-group">
-                            <a href="/audit?compliance_type=global_security" class="list-group-item list-group-item-action">Global Security Standards (ISO 27001, PCI DSS)</a>
-                            <a href="/audit?compliance_type=us_banking" class="list-group-item list-group-item-action">US Banking Laws (Dodd-Frank, etc.)</a>
-                            <a href="/audit?compliance_type=eu_banking" class="list-group-item list-group-item-action">EU Banking Laws (CRR, CRD, GDPR)</a>
-                            <a href="/audit?compliance_type=sox" class="list-group-item list-group-item-action">SOX Compliance</a>
-                            <a href="/audit?compliance_type=basel_iii" class="list-group-item list-group-item-action">Basel III Framework</a>
-                        </div>
+                        <form action="/audit" method="post">
+                            <div class="mb-3">
+                                <label for="countrySelect" class="form-label">Select Country/Jurisdiction:</label>
+                                <select class="form-select" id="countrySelect" name="country" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Global">Global Standards</option>
+                                    <option value="USA">USA</option>
+                                    <option value="UAE">UAE</option>
+                                    <option value="UK">UK</option>
+                                    <option value="EU">EU</option>
+                                    <option value="Ghana">Ghana</option>
+                                    <option value="Nigeria">Nigeria</option>
+                                    <option value="Pakistan">Pakistan</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Select Compliance Areas:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="compliance_areas" value="ISO 27001" id="iso27001">
+                                    <label class="form-check-label" for="iso27001">ISO 27001</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="compliance_areas" value="PCI DSS" id="pci_dss">
+                                    <label class="form-check-label" for="pci_dss">PCI DSS</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="compliance_areas" value="SOX" id="sox">
+                                    <label class="form-check-label" for="sox">SOX</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="compliance_areas" value="Basel III" id="basel_iii">
+                                    <label class="form-check-label" for="basel_iii">Basel III</label>
+                                </div>
+                                <!-- Local laws will be dynamically added based on country selection -->
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg mt-3">Start Audit</button>
+                        </form>
                     </div>
                 </div>
             </div>

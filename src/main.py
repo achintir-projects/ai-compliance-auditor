@@ -23,37 +23,35 @@ def index():
     """Displays the landing page."""
     return render_template('index.html')
 
-@app.route('/selection')
+@app.route('/selection', methods=['GET', 'POST'])
 def selection():
     """Displays the compliance type selection page."""
-    return render_template('selection.html')
+    project_home = get_project_home()
+    global_standards_path = os.path.join(project_home, 'data', 'global_standards.json')
+    local_laws_path = os.path.join(project_home, 'data', 'local_banking_laws.json')
 
-@app.route('/audit')
+    standards_parser = StandardsParser(
+        global_standards_path=global_standards_path,
+        local_laws_path=local_laws_path
+    )
+    
+    # Load all global standards and local laws to populate the selection page
+    all_standards = standards_parser.global_standards
+    all_laws = standards_parser.local_laws
+
+    return render_template('selection.html', global_standards=all_standards, local_laws=all_laws)
+
+
+@app.route('/audit', methods=['POST'])
 def audit():
     """Displays the questionnaire based on the selected compliance type."""
     project_home = get_project_home()
-    compliance_type = request.args.get('compliance_type')
     
-    # Determine the jurisdiction and standards based on the compliance type
-    if compliance_type == 'global_security':
-        jurisdiction_to_audit = ''
-        standards_to_include = ['ISO 27001', 'PCI DSS']
-    elif compliance_type == 'us_banking':
-        jurisdiction_to_audit = 'USA'
-        standards_to_include = []
-    elif compliance_type == 'eu_banking':
-        jurisdiction_to_audit = 'EU'
-        standards_to_include = []
-    elif compliance_type == 'sox':
-        jurisdiction_to_audit = ''
-        standards_to_include = ['SOX']
-    elif compliance_type == 'basel_iii':
-        jurisdiction_to_audit = ''
-        standards_to_include = ['Basel III']
-    else:
-        # Default to all
-        jurisdiction_to_audit = 'UAE, UK, USA, EU, Ghana, Nigeria and Pakistan'
-        standards_to_include = []
+    selected_country = request.form.get('country')
+    selected_compliance_areas = request.form.getlist('compliance_areas') # getlist for multiple checkboxes
+
+    jurisdiction_to_audit = selected_country if selected_country != 'Global' else ''
+    standards_to_include = selected_compliance_areas
 
     # Construct absolute paths to data files
     global_standards_path = os.path.join(project_home, 'data', 'global_standards.json')
@@ -76,11 +74,11 @@ def audit():
             if (not standards_to_include or std_name in standards_to_include) and 'clauses' in std_data and std_data['clauses']:
                 questions[std_name] = std_data['clauses']
 
-    if 'local' in parsed_standards and jurisdiction_to_audit:
+    if 'local' in parsed_standards and selected_country != 'Global':
         for jurisdiction, laws in parsed_standards['local'].items():
-            if jurisdiction == jurisdiction_to_audit:
+            if jurisdiction == selected_country:
                 for law_name, law_data in laws.items():
-                    if 'clauses' in law_data and law_data['clauses']:
+                    if (not standards_to_include or law_name in standards_to_include) and 'clauses' in law_data and law_data['clauses']:
                         questions[law_name] = law_data['clauses']
 
     return render_template('audit.html', questions=questions)
