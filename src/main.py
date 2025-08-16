@@ -6,6 +6,7 @@ from analysis import GapAnalysis
 from reporting import ReportGenerator, RemediationPlanner
 from monitoring import MonitoringSetup
 import json
+import os
 
 app = Flask(__name__)
 
@@ -13,14 +14,19 @@ def run_audit(jurisdiction):
     """
     Main entry point for the AI Compliance Auditor application.
     """
+    # Construct absolute paths to data files
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    global_standards_path = os.path.join(project_root, 'data', 'global_standards.json')
+    local_laws_path = os.path.join(project_root, 'data', 'local_banking_laws.json')
+
     # Step 1: Context & Scope Capture
     context_capturer = ContextCapture()
     audit_context = context_capturer.gather_context(jurisdiction)
 
     # Step 2: Standards Retrieval & Parsing
     standards_parser = StandardsParser(
-        global_standards_path='data/global_standards.json',
-        local_laws_path='data/local_banking_laws.json'
+        global_standards_path=global_standards_path,
+        local_laws_path=local_laws_path
     )
     parsed_standards = standards_parser.retrieve_and_parse(audit_context['jurisdiction'])
 
@@ -55,7 +61,7 @@ def run_audit(jurisdiction):
     remediation_playbook = remediation_planner.create_playbook()
 
     # Step 7: Continuous Monitoring Setup
-    monitoring_setup = MonitoringSetup(gap_analysis_results)
+    monitoring__setup = MonitoringSetup(gap_analysis_results)
     monitoring_checklist = monitoring_setup.generate_checklist()
     
     # Combine all reports into a single HTML string
