@@ -38,14 +38,20 @@
                                     <h3>{{ standard }}</h3>
                                     {% for control in controls %}
                                         <div class="mb-3">
-                                            <p class="mb-1">{{ control }}</p>
+                                            <p class="mb-1">{{ control.name }} 
+                                                {% if control.type == 'key' %}
+                                                    <span class="badge bg-danger">Key Control</span>
+                                                {% else %}
+                                                    <span class="badge bg-info">Secondary Control</span>
+                                                {% endif %}
+                                            </p>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" id="{{ standard }}-{{ control }}-yes" name="{{ standard }}|{{ control }}" value="yes" required>
-                                                <label class="form-check-label" for="{{ standard }}-{{ control }}-yes">Yes</label>
+                                                <input class="form-check-input" type="radio" id="{{ standard }}-{{ control.name }}-yes" name="{{ standard }}|{{ control.name }}" value="yes" required>
+                                                <label class="form-check-label" for="{{ standard }}-{{ control.name }}-yes">Yes</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" id="{{ standard }}-{{ control }}-no" name="{{ standard }}|{{ control }}" value="no">
-                                                <label class="form-check-label" for="{{ standard }}-{{ control }}-no">No</label>
+                                                <input class="form-check-input" type="radio" id="{{ standard }}-{{ control.name }}-no" name="{{ standard }}|{{ control.name }}" value="no">
+                                                <label class="form-check-label" for="{{ standard }}-{{ control.name }}-no">No</label>
                                             </div>
                                         </div>
                                     {% endfor %}

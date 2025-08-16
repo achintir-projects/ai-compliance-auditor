@@ -72,14 +72,16 @@ def audit():
     if 'global' in parsed_standards:
         for std_name, std_data in parsed_standards['global'].items():
             if (not standards_to_include or std_name in standards_to_include) and 'clauses' in std_data and std_data['clauses']:
-                questions[std_name] = std_data['clauses']
+                # Handle new clause structure (list of dicts)
+                questions[std_name] = [{'name': c['name'], 'type': c['type']} if isinstance(c, dict) else {'name': c, 'type': 'secondary'} for c in std_data['clauses']]
 
     if 'local' in parsed_standards and selected_country != 'Global':
         for jurisdiction, laws in parsed_standards['local'].items():
             if jurisdiction == selected_country:
                 for law_name, law_data in laws.items():
-                    if (not standards_to_include or law_name in standards_to_include) and 'clauses' in law_data and law_data['clauses']:
-                        questions[law_name] = law_data['clauses']
+                    # Automatically include all local laws for the selected country
+                    if 'clauses' in law_data and law_data['clauses']:
+                        questions[law_name] = [{'name': c['name'], 'type': c['type']} if isinstance(c, dict) else {'name': c, 'type': 'secondary'} for c in law_data['clauses']]
 
     return render_template('audit.html', questions=questions)
 
@@ -95,10 +97,10 @@ def report():
     # Process the form data to get the evidence
     declarative_evidence = {}
     for key, value in request.form.items():
-        standard, control = key.split('|')
+        standard, control_name = key.split('|')
         if standard not in declarative_evidence:
             declarative_evidence[standard] = {}
-        declarative_evidence[standard][control] = value
+        declarative_evidence[standard][control_name] = value
 
     # Run the audit with the collected evidence
     audit_report, remediation_playbook, monitoring_checklist = run_audit(jurisdiction_to_audit, project_home, declarative_evidence)
