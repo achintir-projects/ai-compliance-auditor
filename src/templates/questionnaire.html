@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Compliance Auditor - Questionnaire</title>
+</head>
+<body>
+    <h1>AI Compliance Auditor - Questionnaire</h1>
+    <form action="/report" method="post">
+        {% for standard, controls in questions.items() %}
+            <h2>{{ standard }}</h2>
+            {% for control in controls %}
+                <p>{{ control }}</p>
+                <input type="radio" id="{{ standard }}-{{ control }}-yes" name="{{ standard }}|{{ control }}" value="yes" required>
+                <label for="{{ standard }}-{{ control }}-yes">Yes</label>
+                <input type="radio" id="{{ standard }}-{{ control }}-no" name="{{ standard }}|{{ control }}" value="no">
+                <label for="{{ standard }}-{{ control }}-no">No</label>
+                <br><br>
+            {% endfor %}
+        {% endfor %}
+        <input type="submit" value="Generate Report">
+    </form>
+</body>
+</html>
