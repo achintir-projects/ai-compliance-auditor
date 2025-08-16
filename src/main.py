@@ -20,10 +20,41 @@ def get_project_home():
 
 @app.route('/')
 def index():
-    """Displays the questionnaire."""
+    """Displays the landing page."""
+    return render_template('index.html')
+
+@app.route('/selection')
+def selection():
+    """Displays the compliance type selection page."""
+    return render_template('selection.html')
+
+@app.route('/audit')
+def audit():
+    """Displays the questionnaire based on the selected compliance type."""
     project_home = get_project_home()
-    jurisdiction_to_audit = request.args.get('jurisdiction', 'UAE, UK, USA, EU, Ghana, Nigeria and Pakistan')
+    compliance_type = request.args.get('compliance_type')
     
+    # Determine the jurisdiction and standards based on the compliance type
+    if compliance_type == 'global_security':
+        jurisdiction_to_audit = ''
+        standards_to_include = ['ISO 27001', 'PCI DSS']
+    elif compliance_type == 'us_banking':
+        jurisdiction_to_audit = 'USA'
+        standards_to_include = []
+    elif compliance_type == 'eu_banking':
+        jurisdiction_to_audit = 'EU'
+        standards_to_include = []
+    elif compliance_type == 'sox':
+        jurisdiction_to_audit = ''
+        standards_to_include = ['SOX']
+    elif compliance_type == 'basel_iii':
+        jurisdiction_to_audit = ''
+        standards_to_include = ['Basel III']
+    else:
+        # Default to all
+        jurisdiction_to_audit = 'UAE, UK, USA, EU, Ghana, Nigeria and Pakistan'
+        standards_to_include = []
+
     # Construct absolute paths to data files
     global_standards_path = os.path.join(project_home, 'data', 'global_standards.json')
     local_laws_path = os.path.join(project_home, 'data', 'local_banking_laws.json')
@@ -42,22 +73,26 @@ def index():
     questions = {}
     if 'global' in parsed_standards:
         for std_name, std_data in parsed_standards['global'].items():
-            if 'clauses' in std_data and std_data['clauses']:
+            if (not standards_to_include or std_name in standards_to_include) and 'clauses' in std_data and std_data['clauses']:
                 questions[std_name] = std_data['clauses']
 
-    if 'local' in parsed_standards:
+    if 'local' in parsed_standards and jurisdiction_to_audit:
         for jurisdiction, laws in parsed_standards['local'].items():
-            for law_name, law_data in laws.items():
-                if 'clauses' in law_data and law_data['clauses']:
-                    questions[law_name] = law_data['clauses']
+            if jurisdiction == jurisdiction_to_audit:
+                for law_name, law_data in laws.items():
+                    if 'clauses' in law_data and law_data['clauses']:
+                        questions[law_name] = law_data['clauses']
 
-    return render_template('questionnaire.html', questions=questions)
+    return render_template('audit.html', questions=questions)
+
 
 @app.route('/report', methods=['POST'])
 def report():
     """Processes the questionnaire and displays the report."""
     project_home = get_project_home()
-    jurisdiction_to_audit = request.args.get('jurisdiction', 'UAE, UK, USA, EU, Ghana, Nigeria and Pakistan')
+    # We need to get the jurisdiction from the form or the previous request.
+    # For simplicity, we'll just get all jurisdictions for now.
+    jurisdiction_to_audit = 'UAE, UK, USA, EU, Ghana, Nigeria and Pakistan'
     
     # Process the form data to get the evidence
     declarative_evidence = {}

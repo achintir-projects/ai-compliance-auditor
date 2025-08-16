@@ -1,0 +1,21 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    padding-top: 50px;
+}
+
+h1 {
+    color: #003366; /* Dark blue */
+}
+
+.btn-primary {
+    background-color: #003366;
+    border-color: #003366;
+}
+
+.btn-primary:hover {
+    background-color: #00509E;
+    border-color: #00509E;
+}
