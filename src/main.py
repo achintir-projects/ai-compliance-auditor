@@ -10,14 +10,13 @@ import os
 
 app = Flask(__name__)
 
-def run_audit(jurisdiction):
+def run_audit(jurisdiction, project_home):
     """
     Main entry point for the AI Compliance Auditor application.
     """
     # Construct absolute paths to data files
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    global_standards_path = os.path.join(project_root, 'data', 'global_standards.json')
-    local_laws_path = os.path.join(project_root, 'data', 'local_banking_laws.json')
+    global_standards_path = os.path.join(project_home, 'data', 'global_standards.json')
+    local_laws_path = os.path.join(project_home, 'data', 'local_banking_laws.json')
 
     # Step 1: Context & Scope Capture
     context_capturer = ContextCapture()
@@ -61,7 +60,7 @@ def run_audit(jurisdiction):
     remediation_playbook = remediation_planner.create_playbook()
 
     # Step 7: Continuous Monitoring Setup
-    monitoring__setup = MonitoringSetup(gap_analysis_results)
+    monitoring_setup = MonitoringSetup(gap_analysis_results)
     monitoring_checklist = monitoring_setup.generate_checklist()
     
     # Combine all reports into a single HTML string
@@ -78,7 +77,12 @@ def run_audit(jurisdiction):
 @app.route('/')
 def index():
     jurisdiction_to_audit = request.args.get('jurisdiction', 'UAE, UK, USA, EU, Ghana, Nigeria and Pakistan')
-    return run_audit(jurisdiction_to_audit)
+    # Get project_home from the environment variable
+    project_home = os.environ.get('PROJECT_HOME')
+    return run_audit(jurisdiction_to_audit, project_home)
 
 if __name__ == '__main__':
+    # For local testing, we can set a default project_home
+    project_home = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.environ['PROJECT_HOME'] = project_home
     app.run(debug=True)
