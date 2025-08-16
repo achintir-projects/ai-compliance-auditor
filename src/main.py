@@ -50,6 +50,9 @@ def audit():
     selected_country = request.form.get('country')
     selected_compliance_areas = request.form.getlist('compliance_areas') # getlist for multiple checkboxes
 
+    print(f"DEBUG: selected_country: {selected_country}")
+    print(f"DEBUG: selected_compliance_areas: {selected_compliance_areas}")
+
     # Determine the jurisdiction for context capture
     # If a specific country is selected, use it. Otherwise, use all for global standards.
     jurisdiction_for_context = selected_country if selected_country and selected_country != 'Global' else 'UAE, UK, USA, EU, Ghana, Nigeria and Pakistan'
@@ -84,6 +87,8 @@ def audit():
             for law_name, law_data in parsed_standards['local'][selected_country].items():
                 if 'clauses' in law_data and law_data['clauses']:
                     questions[law_name] = [{'name': c['name'], 'type': c['type'], 'question_text': c.get('question_text', c['name'])} if isinstance(c, dict) else {'name': c, 'type': 'secondary', 'question_text': c} for c in law_data['clauses']]
+
+    print(f"DEBUG: Final questions dictionary: {questions}")
 
     return render_template('audit.html', questions=questions)
 
